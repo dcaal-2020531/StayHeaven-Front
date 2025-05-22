@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/stylelogin.css';
 
+// Ruta base del backend (cámbiala según sea necesario)
+const BACKEND_URL = 'http://localhost:1999/v1/login/login';
+
 const Login = () => {
   const [activeTab, setActiveTab] = useState('signin');
   const [age, setAge] = useState('');
@@ -22,20 +25,88 @@ const Login = () => {
     setAge(calculatedAge >= 0 ? calculatedAge : '');
   };
 
-  const goToDashboard = (event) => {
+  const goToDashboard = async (event) => {
     event.preventDefault();
-    const checkbox = event.target.querySelector('input[type="checkbox"]');
-    if (checkbox && checkbox.checked) {
-      alert('Inicio de sesión simulado. Redirigiendo al dashboard...');
-      navigate('/dashboard');
-    } else {
+
+    const form = event.target;
+    const email = form.querySelector('input[type="email"]').value;
+    const password = form.querySelector('input[type="password"]').value;
+    const checkbox = form.querySelector('input[type="checkbox"]');
+
+    if (!checkbox.checked) {
       alert('Por favor confirma que no eres un robot.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Inicio de sesión exitoso');
+        // Si usas token: localStorage.setItem('token', data.token);
+        navigate('/dashboard');
+      } else {
+        alert(`Error: ${data.message || 'Credenciales inválidas'}`);
+      }
+    } catch (error) {
+      alert('Ocurrió un error al conectar con el servidor');
+      console.error(error);
     }
   };
 
-  const handleRegister = (event) => {
+  const handleRegister = async (event) => {
     event.preventDefault();
-    alert('Registro simulado.');
+
+    const form = event.target;
+    const name = form.querySelector('input[placeholder="Nombres"]').value;
+    const surname = form.querySelector('input[placeholder="Apellidos"]').value;
+    const email = form.querySelector('input[type="email"]').value;
+    const password = form.querySelector('input[type="password"]').value;
+    const birthdate = form.querySelector('input[type="date"]').value;
+    const age = form.querySelector('input[name="age"]').value;
+    const checkbox = form.querySelector('input[type="checkbox"]');
+
+    if (!checkbox.checked) {
+      alert('Por favor confirma que no eres un robot.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          surname,
+          email,
+          password,
+          birthdate,
+          age: Number(age),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Registro exitoso. Ahora puedes iniciar sesión.');
+        setActiveTab('signin');
+      } else {
+        alert(`Error: ${data.message || 'No se pudo registrar el usuario'}`);
+      }
+    } catch (error) {
+      alert('Ocurrió un error al conectar con el servidor');
+      console.error(error);
+    }
   };
 
   return (
