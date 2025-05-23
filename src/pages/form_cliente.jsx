@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
+import { useNavigate } from 'react-router-dom';
 import '../css/form_style.css';
 
 const FormCliente = () => {
@@ -7,33 +7,36 @@ const FormCliente = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes manejar el envío del formulario
     console.log('Formulario enviado');
-    // Luego de guardar, por ejemplo, navegas a la lista de clientes:
     navigate('/clientes');
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
-    navigate('/clientes'); // Ruta a donde quieres volver al cancelar
+    navigate('/clientes');
   };
 
   return (
-    <div className="content">
-      <h1>Registrar Nuevo Cliente</h1>
-      <form className="card" onSubmit={handleSubmit}>
-        <label>Nombre Completo:</label><br />
-        <input type="text" name="nombre" required /><br /><br />
+    <div className="page-wrapper">
+      <div className="form-container">
+        <form className="card expanded-form" onSubmit={handleSubmit}>
+          <h1>Registrar Nuevo Cliente</h1>
 
-        <label>Email:</label><br />
-        <input type="email" name="email" required /><br /><br />
+          <label>Nombre Completo:</label>
+          <input type="text" name="nombre" required />
 
-        <label>Teléfono:</label><br />
-        <input type="text" name="telefono" /><br /><br />
+          <label>Email:</label>
+          <input type="email" name="email" required />
 
-        <button type="submit" className="btn submit">Guardar</button>
-        <button className="btn cancel" onClick={handleCancel}>Cancelar</button>
-      </form>
+          <label>Teléfono:</label>
+          <input type="text" name="telefono" />
+
+          <div className="form-actions">
+            <button type="submit" className="btn submit">Guardar</button>
+            <button type="button" className="btn cancel" onClick={handleCancel}>Cancelar</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

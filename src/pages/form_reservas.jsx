@@ -18,31 +18,42 @@ const FormReserva = () => {
   };
 
   return (
-    <div className="content">
-      <h1>Agregar Reserva</h1>
-      <form className="card" onSubmit={handleSubmit}>
-        <label>Nombre del Cliente:</label>
-        <input type="text" required /><br /><br />
+    <div className="page-wrapper">
+      <div className="form-container">
+        <form className="card expanded-form" onSubmit={handleSubmit}>
+          <h1>Agregar Reserva</h1>
 
-        <label>Número de Habitación:</label>
-        <input type="text" required /><br /><br />
+          <label>Nombre del Cliente:</label>
+          <input type="text" required />
 
-        <label>Fecha de Entrada:</label>
-        <input type="date" required /><br /><br />
+          <label>Número de Habitación:</label>
+          <input type="text" required />
 
-        <label>Fecha de Salida:</label>
-        <input type="date" required /><br /><br />
+          <label>Fecha de Entrada:</label>
+          <input type="date" required />
 
-        <label>Estado:</label>
-        <select required defaultValue="">
-          <option value="" disabled>Selecciona</option>
-          <option>Activa</option>
-          <option>Finalizada</option>
-        </select><br /><br />
+          <label>Fecha de Salida:</label>
+          <input type="date" required />
 
-        <button type="submit" className="btn submit">Guardar</button>
-        <button className="btn cancel" onClick={handleCancel}>Cancelar</button>
-      </form>
+          <label>Estado:</label>
+          <select required defaultValue="">
+            <option value="" disabled>
+              Selecciona
+            </option>
+            <option>Activa</option>
+            <option>Finalizada</option>
+          </select>
+
+          <div className="form-actions">
+            <button type="submit" className="btn submit">
+              Guardar
+            </button>
+            <button type="button" className="btn cancel" onClick={handleCancel}>
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

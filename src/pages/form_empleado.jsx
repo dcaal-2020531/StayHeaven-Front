@@ -9,31 +9,35 @@ const FormEmpleado = () => {
     e.preventDefault();
     // Aquí puedes manejar el envío del formulario
     console.log('Empleado guardado');
-    // Después de guardar, rediriges a la lista de empleados, por ejemplo:
     navigate('/empleados');
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
-    navigate('/empleados'); // Cambia la ruta según corresponda
+    navigate('/empleados');
   };
 
   return (
-    <div className="content">
-      <h1>Agregar Empleado</h1>
-      <form className="card" onSubmit={handleSubmit}>
-        <label>Nombre:</label><br />
-        <input type="text" required /><br /><br />
+    <div className="page-wrapper">
+      <div className="form-container">
+        <form className="card expanded-form" onSubmit={handleSubmit}>
+          <h1>Agregar Empleado</h1>
 
-        <label>Rol:</label><br />
-        <input type="text" /><br /><br />
+          <label>Nombre:</label>
+          <input type="text" required />
 
-        <label>Correo Electrónico:</label><br />
-        <input type="email" /><br /><br />
+          <label>Rol:</label>
+          <input type="text" />
 
-        <button type="submit" className="btn submit">Guardar</button>
-        <button className="btn cancel" onClick={handleCancel}>Cancelar</button>
-      </form>
+          <label>Correo Electrónico:</label>
+          <input type="email" />
+
+          <div className="form-actions">
+            <button type="submit" className="btn submit">Guardar</button>
+            <button type="button" className="btn cancel" onClick={handleCancel}>Cancelar</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

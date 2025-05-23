@@ -5,6 +5,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/index.jsx';  
 import Dashboard from './pages/dashboard.jsx';
 
+import Hoteles from './pages/hoteles.jsx';
+import AdminPlataforma from './pages/adminPlataforma.jsx';
+
 import Facturas from './pages/factura.jsx';
 import FormFactura from './pages/form_factura.jsx';
 
@@ -56,6 +59,10 @@ function App() {
         {/* Reservas */}
         <Route path="/reservas" element={<Reservas />} />
         <Route path="/reservas/nueva" element={<FormReserva />} />
+
+        <Route path="/hoteles" element={<Hoteles />} />
+        <Route path="/admin-plataforma" element={<AdminPlataforma />} />
+
       </Routes>
     </BrowserRouter>
   );

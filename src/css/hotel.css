@@ -1,0 +1,107 @@
+.content {
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: #1a2a6c;
+  font-weight: 700;
+  font-size: 2.5rem;
+  letter-spacing: 1.2px;
+  text-shadow: 1px 1px 3px rgba(26, 42, 108, 0.3);
+}
+
+.hoteles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  justify-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hotel-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    0 12px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 320px;
+  padding: 2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.hotel-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.hotel-card h2 {
+  color: #1a2a6c;
+  margin-bottom: 0.75rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.hotel-card p {
+  flex-grow: 1;
+  color: #555f7a;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  user-select: none;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-reservar {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(118, 75, 162, 0.4);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.btn-reservar:hover {
+  background: linear-gradient(135deg, #764ba2, #667eea);
+  box-shadow: 0 6px 14px rgba(118, 75, 162, 0.6);
+  transform: scale(1.05);
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .hotel-card {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+  }
+
+  .btn-reservar {
+    width: 100%;
+    padding: 14px 0;
+  }
+}
