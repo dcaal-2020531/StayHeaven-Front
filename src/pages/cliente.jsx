@@ -36,7 +36,7 @@ const Clientes = () => {
   return (
     <div className="content">
       <h1>Gestión de Clientes</h1>
-      <button className="btn" onClick={goToFormCliente}>Agregar Cliente</button>
+      
       <button className="btn" onClick={goToFormCliente2}> De greso a la página</button>
       {loading ? (
         <p>Cargando clientes...</p>

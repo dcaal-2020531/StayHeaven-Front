@@ -36,7 +36,7 @@ const Dashboard = () => {
           <li><button onClick={() => navigate('/reservas')} className="nav-button"><i className="fas fa-calendar-check"></i> Reservas</button></li>
           <li><button onClick={() => navigate('/facturas')} className="nav-button"><i className="fas fa-file-invoice-dollar"></i> Factura</button></li>
           <li><button onClick={() => navigate('/empleados')} className="nav-button"><i className="fas fa-users"></i> Empleados</button></li>
-                    <li><button onClick={() => navigate('/hoteles')} className="nav-button"><i className="fas fa-hotel"></i> hoteles  </button></li>
+          <li><button onClick={() => navigate('/hoteles')} className="nav-button"><i className="fas fa-hotel"></i> hoteles  </button></li>
           <li><button onClick={() => navigate('/admin-plataforma')} className="nav-button"><i className="fas fa-user"></i> Admin de Plataforma</button></li>
           <li><button onClick={() => navigate('/')} className="nav-button"><i className="fas fa-sign-out-alt"></i> Cerrar Sesión</button></li>
         </ul>
