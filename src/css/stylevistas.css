@@ -77,12 +77,15 @@ h1 {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 10px rgb(0, 0, 0);
-  table-layout: fixed; /* para que las celdas tengan tamaño fijo */
+  table-layout: fixed;
+
+  /* Letras negras en modo oscuro */
+  color: black !important;
 }
 
 .styled-table thead tr {
   background-color: #28a745;
-  color: #ffffff;
+  color: white; /* mantiene blanco en encabezado */
   text-align: left;
 }
 
@@ -91,6 +94,9 @@ h1 {
   padding: 12px 15px;
   border: 1px solid #dddddd;
   word-wrap: break-word;
+
+  /* Letras negras en modo oscuro */
+  color: black !important;
 }
 
 .styled-table tbody tr {

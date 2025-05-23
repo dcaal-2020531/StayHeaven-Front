@@ -10,6 +10,11 @@ const Reservas = () => {
     navigate('/reservas/nueva'); // Ruta React Router para el formulario de reservas
   };
 
+    const goToFormReserva2 = (e) => {
+    e.preventDefault();
+    navigate('/dashboard'); // Ruta React Router para el formulario de reservas
+  };
+
   return (
     <div className="content">
       <h1>Gestión de Reservas</h1>
@@ -17,6 +22,7 @@ const Reservas = () => {
       <div className="card">
         <h2>Agregar Reserva</h2>
         <button className="btn" onClick={goToFormReserva}>Agregar Reserva</button>
+        <button className="btn" onClick={goToFormReserva2}> Regresar a la página principal </button>
       </div>
 
       <table className="styled-table">

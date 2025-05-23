@@ -12,7 +12,7 @@ const Clientes = () => {
   };
 
    const goToFormCliente2 = () => {
-    navigate('/admin-plataforma');
+    navigate('/dashboard');
   };
 
 
@@ -46,7 +46,7 @@ const Clientes = () => {
             <tr>
               <th>Nombre</th>
               <th>Email</th>
-              <th>Acciones</th>
+
             </tr>
           </thead>
           <tbody>
@@ -54,9 +54,7 @@ const Clientes = () => {
               <tr key={cliente._id}>
                 <td>{cliente.name} {cliente.surname}</td>
                 <td>{cliente.email}</td>
-                <td>
-                  <button className="btn">Editar</button>
-                </td>
+                
               </tr>
             ))}
           </tbody>

@@ -24,39 +24,53 @@ html, body, #root {
   box-sizing: border-box;
 }
 
+/* Card blanca y texto negro SIEMPRE */
 .card.expanded-form {
   width: 100%;
   max-width: 800px;
   max-height: 90vh;
-  background-color: #f9f9f9;
+  background-color: #ffffff !important;
+  color: #000000 !important;
   padding: 40px;
   border-radius: 12px;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
   display: grid;
   gap: 20px;
   box-sizing: border-box;
-  overflow-y: auto; /* <- Habilita scroll si el contenido crece */
+  overflow-y: auto;
 }
 
 .card.expanded-form h1 {
   text-align: center;
   margin: 0 0 20px 0;
+  color: #000000 !important;
 }
 
 .card.expanded-form label {
   font-weight: bold;
-  color: #555;
+  color: #000000 !important;
 }
 
-.card.expanded-form textarea {
-  width: 100%;
-  padding: 14px;
-  font-size: 1em;
+.card.expanded-form textarea,
+.card.expanded-form input {
+  background-color: #ffffff !important;
+  color: #000000 !important;
   border: 1px solid #ccc;
   border-radius: 8px;
+  padding: 14px;
+  font-size: 1em;
   box-sizing: border-box;
 }
 
+/* Elimina interferencia de modo oscuro */
+.dark-mode .card.expanded-form textarea,
+.dark-mode .card.expanded-form input {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #ccc !important;
+}
+
+.card.expanded-form textarea:focus,
 .card.expanded-form input:focus {
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
