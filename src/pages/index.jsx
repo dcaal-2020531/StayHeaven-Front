@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/stylelogin.css';
 
-// Ruta base del backend (cámbiala según sea necesario)
-const BACKEND_URL = 'http://localhost:1999/v1/login/login';
+const BACKEND_URL = 'http://localhost:1992/v1/login/addClient';
+
+const BACKEND_URL2 = 'http://localhost:1992/v1/login/initLogin';
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState('signin');
@@ -25,9 +26,9 @@ const Login = () => {
     setAge(calculatedAge >= 0 ? calculatedAge : '');
   };
 
+  // Función para iniciar sesión
   const goToDashboard = async (event) => {
     event.preventDefault();
-
     const form = event.target;
     const email = form.querySelector('input[type="email"]').value;
     const password = form.querySelector('input[type="password"]').value;
@@ -39,11 +40,9 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch(`${BACKEND_URL}/login`, {
+      const response = await fetch(`${BACKEND_URL2}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
 
@@ -51,8 +50,7 @@ const Login = () => {
 
       if (response.ok) {
         alert('Inicio de sesión exitoso');
-        // Si usas token: localStorage.setItem('token', data.token);
-        navigate('/dashboard');
+        navigate('/dashboard'); // Redirige al dashboard
       } else {
         alert(`Error: ${data.message || 'Credenciales inválidas'}`);
       }
@@ -62,16 +60,19 @@ const Login = () => {
     }
   };
 
+  // Función para registrar nuevo usuario
   const handleRegister = async (event) => {
     event.preventDefault();
-
     const form = event.target;
-    const name = form.querySelector('input[placeholder="Nombres"]').value;
-    const surname = form.querySelector('input[placeholder="Apellidos"]').value;
+
+    const name = form.querySelector('input[name="name"]').value;
+    const surname = form.querySelector('input[name="surname"]').value;
     const email = form.querySelector('input[type="email"]').value;
     const password = form.querySelector('input[type="password"]').value;
-    const birthdate = form.querySelector('input[type="date"]').value;
-    const age = form.querySelector('input[name="age"]').value;
+    const birthdate = form.querySelector('input[name="birthdate"]').value;
+    const phone = form.querySelector('input[name="phone"]').value;
+    const country = form.querySelector('input[name="country"]').value;
+    const city = form.querySelector('input[name="city"]').value;
     const checkbox = form.querySelector('input[type="checkbox"]');
 
     if (!checkbox.checked) {
@@ -80,29 +81,36 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch(`${BACKEND_URL}/register`, {
+      const response = await fetch(`${BACKEND_URL}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name,
           surname,
           email,
           password,
           birthdate,
-          age: Number(age),
+          phone,
+          country,
+          city,
+          role: 'CLIENT',
         }),
       });
 
-      const data = await response.json();
+      const contentType = response.headers.get('content-type');
 
-      if (response.ok) {
-        alert('Registro exitoso. Ahora puedes iniciar sesión.');
-        setActiveTab('signin');
-      } else {
-        alert(`Error: ${data.message || 'No se pudo registrar el usuario'}`);
+      if (!response.ok) {
+        const errorText = contentType && contentType.includes('application/json')
+          ? await response.json()
+          : await response.text();
+
+        alert(`Error: ${errorText.message || errorText || 'No se pudo registrar el usuario'}`);
+        return;
       }
+
+      await response.json();
+      alert('Registro exitoso. Ahora puedes iniciar sesión.');
+      setActiveTab('signin');
     } catch (error) {
       alert('Ocurrió un error al conectar con el servidor');
       console.error(error);
@@ -111,10 +119,8 @@ const Login = () => {
 
   return (
     <>
-      {/* Fondo fijo */}
       <div className="background-layer"></div>
 
-      {/* Contenedor centrador */}
       <div className="center-wrapper">
         <div className="form-container">
           <div className="tabs">
@@ -149,21 +155,23 @@ const Login = () => {
           {activeTab === 'signup' && (
             <form id="signup-form" className="form active" onSubmit={handleRegister}>
               <h2>Registro</h2>
-              <input type="text" placeholder="Nombres" required />
-              <input type="text" placeholder="Apellidos" required />
+              <input type="text" placeholder="Nombres" name="name" required />
+              <input type="text" placeholder="Apellidos" name="surname" required />
               <input type="email" placeholder="Correo electrónico" required />
               <input type="password" placeholder="Contraseña" required />
+              <input type="text" placeholder="Teléfono" name="phone" required />
+              <input type="text" placeholder="País" name="country" required />
+              <input type="text" placeholder="Ciudad" name="city" required />
               <label htmlFor="birthdate">Fecha de nacimiento:</label>
               <input
                 type="date"
-                id="birthdate"
                 name="birthdate"
                 required
                 onChange={handleBirthdateChange}
               />
               <input
                 type="number"
-                placeholder="Edad"
+                placeholder="Edad (automática)"
                 id="age"
                 name="age"
                 value={age}
